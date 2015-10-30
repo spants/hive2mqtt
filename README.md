@@ -31,6 +31,7 @@ TOPIC	DATA	RETAIN(1=True, 0=False)
 
 House/Hive/devices/Hive Hub/id HWT-050 0
 House/Hive/devices/TemperatureSensorSLT3/battery 5.9 0
+
 House/Hive/devices/TemperatureSensorSLT3/batteryPercentage 100 0
 House/Hive/devices/TemperatureSensorSLT3/signal 100 0
 House/Hive/devices/ThermostatSLR2/temperature 20.25 0
