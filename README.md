@@ -1,7 +1,7 @@
 # hive2mqtt
 Python code to pull data from Hive Active Home and publish to MQTT
 
-Need to install Paha Python MQTT client (using PIP)
+Need to install Paho Python MQTT client (using PIP)
 * pip install paho-mqtt
 
 Install PIP if it is not installed. 
