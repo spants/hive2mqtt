@@ -27,7 +27,7 @@ Example hive_config.json
 MQTTtopic is the root topic that the application will publish to
 
 example:
-TOPIC	DATA	RETAIN
+TOPIC	DATA	RETAIN(1=True, 0=False)
 
 House/Hive/devices/Hive Hub/id HWT-050 0
 House/Hive/devices/TemperatureSensorSLT3/battery 5.9 0
