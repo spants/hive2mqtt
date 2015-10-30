@@ -1,0 +1,11 @@
+{
+  "config": [
+	{ "username":"USERNAME" },
+	{ "password":"PASSWORD" },
+	{ "mqtthost":"mqtthost"},
+	{ "mqttport":"mqttport" },
+	{ "mqttuser":"USERNAME" },
+	{ "mqttpass":"PASSWORD" },
+	{ "mqtttopic":"mqtttopic" }
+    ]
+} 
