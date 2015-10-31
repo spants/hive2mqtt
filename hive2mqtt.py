@@ -2,7 +2,9 @@
 
 hive2mqtt.py 
 ------------
-Version 1.0 
+Version 1.1
+v1.0 - initial release
+v1.1 - Try to take into account non active 2 users 
 
 Note: requires a config file as hsown below.
 
@@ -123,10 +125,11 @@ mqttsend("/devices/"+temp[0]['name']+"/id",temp[0]['short_id'],0)
 url = 'https://api.hivehome.com/v5/users/%s/hubs/%s/devices' %(username, hubid)
 body = makeRequest(url,None)
 devices = json.loads(body)
-#print "--------------"
-#print "This is where the device id is stored, need to parse to find Receiver to use ID later"
-#print body
-#print "--------------"
+print "--------------"
+print "Devices found:"
+print body
+print "--------------"
+print
 
 for index in range(len(devices)):
 
@@ -139,7 +142,7 @@ for index in range(len(devices)):
 	mqttsend("/devices/"+devtype+"/temperature",devices[index]['channels']['temperature'],0)
 	mqttsend("/devices/"+devtype+"/signal",devices[index]['channels']['signal'],0)  
 
-	if devtype == 'ThermostatSLR2':
+	if devtype.startswith("Thermostat"):
 		hubmac= devices[index]['id']
 
 #print "The Receiver MacID = ",hubmac
