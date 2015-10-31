@@ -125,11 +125,11 @@ mqttsend("/devices/"+temp[0]['name']+"/id",temp[0]['short_id'],0)
 url = 'https://api.hivehome.com/v5/users/%s/hubs/%s/devices' %(username, hubid)
 body = makeRequest(url,None)
 devices = json.loads(body)
-print "--------------"
-print "Devices found:"
-print body
-print "--------------"
-print
+#print "--------------"
+#print "Devices found:"
+#print body
+#print "--------------"
+#print
 
 for index in range(len(devices)):
 
@@ -177,10 +177,15 @@ mqttsend("/heating/mode",temp['mode'],1)
 #print "Hotwater Control mode = ",watercontrol
 #print "--------------"
 
-#Get HW control schedule info
+#Get HW control schedule info 
 
 url = 'https://api.hivehome.com/v5/users/%s/hubs/%s/devices/hotwatercontroller/%s/controls/schedule' %(username,hubid, hubmac)
 body = makeRequest(url,None)
+print "--------------"
+print "result from hotwater call:"
+print body
+print "--------------"
+print
 temp = json.loads(body)
 
 mqttsend("/hotwater/control",temp['control'],1)
