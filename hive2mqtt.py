@@ -2,11 +2,11 @@
 
 hive2mqtt.py 
 ------------
-Version 1.1
 v1.0 - initial release
-v1.1 - Try to take into account non active 2 users 
+v1.1 - Try to take into account non Active 2 users 
+v1.2 - Works with Hive Active 2, Hive 1, Heating only & Hotwater & Heating
 
-Note: requires a config file as hsown below.
+Note: requires a config file as shown below.
 
 Reads key information from Hive Active 2 and publishes it on a MQTT server for use with Home Automation,
 NodeRed and other systems such as EMONCMS and Domoticz. With mqtt, the world is open to you.
@@ -181,15 +181,17 @@ mqttsend("/heating/mode",temp['mode'],1)
 
 url = 'https://api.hivehome.com/v5/users/%s/hubs/%s/devices/hotwatercontroller/%s/controls/schedule' %(username,hubid, hubmac)
 body = makeRequest(url,None)
-print "--------------"
-print "result from hotwater call:"
-print body
-print "--------------"
-print
-temp = json.loads(body)
+#print "--------------"
+#print "result from hotwater call:"
+#print body
+#print "--------------"
+#print
 
-mqttsend("/hotwater/control",temp['control'],1)
-mqttsend("/hotwater/mode",temp['onOffState'],1)  
+if (body is not None):
+  temp = json.loads(body)
+
+  mqttsend("/hotwater/control",temp['control'],1)
+  mqttsend("/hotwater/mode",temp['onOffState'],1)  
 
 # Get timestamp for record
 mqttsend("/updated",time.time(),1) 
