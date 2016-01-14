@@ -50,7 +50,7 @@ def mqttsend( topic, data, retain ):
 
 
 # Open config file
-json_data=open('/home/pi/hive_config.json')
+json_data=open('./hive_config.json')
 
 config = json.load(json_data)
 json_data.close()
@@ -159,13 +159,16 @@ for index in range(len(devices)):
 
 url = 'https://api.hivehome.com/v5/users/%s/widgets/climate/%s/controls/schedule' %(username, hubmac)
 body = makeRequest(url,None)
-temp = json.loads(body)
-
-mqttsend("/heating/control",temp['control'],1)
-mqttsend("/heating/mode",temp['mode'],1)  
-
 #print body
+if (body is not None):
+  temp = json.loads(body)
+  mqttsend("/heating/control",temp['control'],1)
+  mqttsend("/heating/mode",temp['mode'],1)  
+  #print temp
+
 #print "--------------"
+
+
 
 # Get hotwater control info - nothing extra than the shown in schedule
 #opener.addheaders = [('X-Requested-With', 'XMLHttpRequest')];
@@ -200,18 +203,19 @@ mqttsend("/updated",time.time(),1)
 url = "https://api.hivehome.com/v5/users/%s/widgets/temperature" %username
 body = makeRequest(url,None)
 #print body
-
-weather = json.loads(body)
-mqttsend("/heating/temperature",weather['inside']['now'],1) 
-mqttsend("/weather/temperature",weather['outside']['now'],1) 
-mqttsend("/weather/description",weather['outside']['weather']['description'],1)
+if (body is not None):
+  weather = json.loads(body)
+  mqttsend("/heating/temperature",weather['inside']['now'],1) 
+  mqttsend("/weather/temperature",weather['outside']['now'],1) 
+  mqttsend("/weather/description",weather['outside']['weather']['description'],1)
 
 # Get heating target temperature
 url = "https://api.hivehome.com/v5/users/%s/widgets/climate/targetTemperature" %username
 body = makeRequest(url,None)
 #print body
-target = json.loads(body)
-mqttsend("/heating/target",target['temperature'],1) 
+if (body is not None):
+  target = json.loads(body)
+  mqttsend("/heating/target",target['temperature'],1) 
 
 
 mqttc.disconnect()
